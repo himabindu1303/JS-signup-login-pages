@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>SignUp Form</h1>
+    <form action="" id="form">
+
+        <label for="Username">UserName</label><br>
+        <input type="text" name="" id="Username" required>
+        <p id="p1"></p>
+
+        <label for="email">Email</label><br>
+        <input type="email" name="" id="email" required>
+        <p id="p2"></p>
+
+        <label for="password">Password</label><br>
+        <input type="password" name="" id="password" required> 
+        <p id="p3"></p>
+
+        <button type="submit">SignUp</button>
+
+    </form>
+    <script>
+        document.getElementById("form").addEventListener("submit", (event) => {
+            event.preventDefault()
+            let namepattern = /^[a-zA-Z]{3,}$/
+            let emailpattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;         
+            let passwordpattern = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[$#@!%&()_.=]){1,})[a-zA-Z0-9$#@!%&()._=]{8,15}$/
+
+            document.getElementById("p1").textContent=""
+            document.getElementById("p2").textContent=""
+            document.getElementById("p3").textContent=""
+
+            let username = document.getElementById("Username").value.trim()
+            let email = document.getElementById("email").value.trim()
+            let password = document.getElementById("password").value.trim()
+
+            let isSignup = true;
+
+            if(!namepattern.test(username)){
+                document.getElementById("p1").textContent= "format is not matched, please use atleast 3 characters"
+                isSignup = false;
+            }
+
+            if(!emailpattern.test(email)){
+                document.getElementById("p2").textContent= "please provide valid email"
+                isSignup = false;
+            }
+
+            if(!passwordpattern.test(password)){
+                document.getElementById("p3").textContent="format is not matched, please use minimum 1 caps,1 small,1 special character and 1 number in the format"
+                isSignup = false;
+            }
+
+            if(isSignup){
+                localStorage.setItem("Email",email)
+                localStorage.setItem("password",password)
+                alert("Submit successfully")
+                window.location.href="ZLogin.html"
+            }
+        })
+        
+    </script>
+</body>
+</html>

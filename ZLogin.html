@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login</h1>
+
+    <form action="" id="form">
+        <label for="email">Email</label><br>
+        <input type="email" name="" id="email" required><br>
+        <p id="loginEmailError" class="error"></p>
+
+        <label for="password">Password</label><br>
+        <input type="password" name="" id="password" required><br>
+        <p id="loginPswdError" class="error"></p>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById("form").addEventListener("submit",(event)=>{
+            event.preventDefault()
+
+            document.getElementById("loginEmailError").textContent = "";
+            document.getElementById("loginPswdError").textContent = "";
+
+            let LoginEmail = document.getElementById("email").value.trim()
+            let LoginPassword = document.getElementById("password").value.trim()
+
+            let localemail = localStorage.getItem("Email")
+            let localpswd = localStorage.getItem("password")
+
+            let isLoginValid = true;
+
+            if(LoginEmail !== localemail){
+                document.getElementById("loginEmailError").textContent = "Email not found. Please sign up first."
+                isLoginValid = false;
+            }
+
+            if(LoginPassword !== localpswd){
+                document.getElementById("loginPswdError").textContent = "Incorrect password"
+                isLoginValid = false;
+            }
+
+            if(isLoginValid){
+                alert("Loginn Successfully")
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>
